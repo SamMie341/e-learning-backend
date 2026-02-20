@@ -1,6 +1,6 @@
 import { Body, Controller, Headers, HttpCode, HttpStatus, Ip, Post } from "@nestjs/common";
 import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
-import { LoginRequestDto } from "src/auth/application/dtos/login-request.dto";
+import { LoginRequestDto } from "src/auth/application/dto/login-request.dto";
 import { LoginUseCase } from "src/auth/application/use-cases/login.use-case";
 
 @ApiTags('Authentication')
