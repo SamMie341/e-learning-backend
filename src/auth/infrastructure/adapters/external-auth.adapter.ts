@@ -23,7 +23,6 @@ export class ExternalAuthAdapter implements IAuthProvider {
     }
 
     async authenticate(username: string, password: string): Promise<AuthUser | null> {
-        this.logger.log(`Attempting to login to: ${this.apiUrl}`);
         if(!this.apiUrl){
             this.logger.error('CRITICAL: API_URL is undefined!');
             return null;
@@ -44,18 +43,28 @@ export class ExternalAuthAdapter implements IAuthProvider {
             const emp = u.employee;
 
             const fullName = `${emp.first_name} ${emp.last_name}`;
-
-            return new AuthUser(
+            const authUser = new AuthUser(
                 u.id.toString(),
                 u.username,
                 fullName,
                 emp.email,
+                emp.empimg,
                 emp.department?.department_name || 'N/A',
+                emp.division?.division_name || 'N/A',
+                emp.unit?.unit_name || 'N/A',
                 u.role,
-                data.token
+                data.token,
             );
+
+            (authUser as any).empimg = emp.empimg || null;
+            (authUser as any).division = emp.division?.division_name || null;
+            (authUser as any).unit = emp.unit?.unit_name || null;
+            (authUser as any).status = emp.status || 'active';
+
+            return authUser;
         } catch (error) {
-            this.logger.error('External Auth Failed:', error.message);
+            const errorMessage = error instanceof Error ? error.message : 'Unknown error';
+            this.logger.error('External Auth Failed:', errorMessage);
             return null;
         }
     }

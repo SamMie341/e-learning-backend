@@ -1,5 +1,5 @@
 import { Injectable } from "@nestjs/common";
-import { ILoginLogger } from "src/auth/domain/ports/loggin-logger.port";
+import { ILoginLogger } from "src/auth/domain/ports/login-logger.port";
 import { PrismaService } from "src/prisma/prisma.service";
 
 @Injectable()

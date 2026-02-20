@@ -5,10 +5,10 @@ export class LoginRequestDto {
     @ApiProperty({example:"ລະຫັດພະນັກງານ", description: "ລະຫັດພະນັກງານ"})
     @IsString()
     @IsNotEmpty()
-    username: string;
+    username!: string;
 
     @ApiProperty({example:"ລະຫັດຜ່ານ", description: "ລະຫັດຜ່ານ"})
     @IsString()
     @IsNotEmpty()
-    password: string;
+    password!: string;
 }

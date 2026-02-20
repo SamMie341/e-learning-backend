@@ -25,24 +25,126 @@ model LoginLog {
 }
 
 model Role {
-  id Int @id @default(autoincrement())
-  name String @unique
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
   description String?
-  users User[]
-  createdAt DateTime @default(now()) @map("create_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  users       User[]
+  createdAt   DateTime @default(now()) @map("create_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
 
   @@map("roles")
 }
 
 model User {
-  id Int @id @default(autoincrement())
-  username String @unique
-  fullname String?
-  roleId Int @map("role_id")
-  role Role @relation(fields: [roleId],references: [id])
-  createdAt DateTime @default(now()) @map("created_at")
-  updatedAt DateTime @updatedAt @map("updated_at")
+  id           Int              @id @default(autoincrement())
+  username     String           @unique
+  fullname     String?
+  empImg       String?          @map("empimg")
+  department   String?          @map("department")
+  division     String?          @map("division")
+  unit         String?          @map("unit")
+  roleId       Int              @map("role_id")
+  role         Role             @relation(fields: [roleId], references: [id])
+  status       String?          @default("active")
+  courses      Course[]
+  enrollments  Enrollment[]
+  progress     LessonProgress[]
+  lastLoginAt  DateTime?        @map("last_login_at")
+  lastActiveAt DateTime?        @map("last_active_at")
+  activityLogs ActivityLog[]
+  createdAt    DateTime         @default(now()) @map("created_at")
+  updatedAt    DateTime         @updatedAt @map("updated_at")
 
   @@map("users")
+}
+
+model Category {
+  id          Int      @id @default(autoincrement())
+  name        String   @unique
+  slug        String   @unique
+  description String?
+  courses     Course[]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@map("categories")
+}
+
+model Course {
+  id          Int     @id @default(autoincrement())
+  title       String
+  description String  @db.Text
+  thumbnail   String?
+  isPublished Boolean @default(false) @map("is_published")
+
+  categoryId Int      @map("category_id")
+  category   Category @relation(fields: [categoryId], references: [id])
+
+  instructorId Int  @map("instructor_id")
+  instructor   User @relation(fields: [instructorId], references: [id])
+
+  lessons     Lesson[]
+  enrollments Enrollment[]
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updateAt  DateTime @updatedAt @map("updated_at")
+}
+
+model Lesson {
+  id          Int     @id @default(autoincrement())
+  title       String
+  content     String? @db.Text
+  videoUrl    String? @map("video_url")
+  order       Int     @default(0)
+  duration    Int     @default(0) @map("duration_seconds")
+  isPublished Boolean @default(false) @map("is_published")
+
+  courseId Int              @map("course_id")
+  course   Course           @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  progress LessonProgress[]
+
+  createdAt DateTime @default(now()) @map("create_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@map("lessons")
+}
+
+model Enrollment {
+  id          Int       @id @default(autoincrement())
+  userId      Int       @map("user_id")
+  user        User      @relation(fields: [userId], references: [id])
+  courseId    Int       @map("course_id")
+  course      Course    @relation(fields: [courseId], references: [id], onDelete: Cascade)
+  enrolledAt  DateTime  @default(now()) @map("enrolled_at")
+  completedAt DateTime? @map("completed_at")
+
+  @@unique([userId, courseId])
+  @@map("enrollments")
+}
+
+model LessonProgress {
+  id            Int      @id @default(autoincrement())
+  isCompleted   Boolean  @default(false) @map("is_completed")
+  timeSpent     Int      @default(0) @map("time_spent_seconds")
+  lastWatchedAt DateTime @default(now()) @map("last_watched_at")
+  userId        Int      @map("user_id")
+  user          User     @relation(fields: [userId], references: [id])
+  lessonId      Int      @map("lesson_id")
+  lesson        Lesson   @relation(fields: [lessonId], references: [id], onDelete: Cascade)
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@unique([userId, lessonId])
+  @@map("lesson_progress")
+}
+
+model ActivityLog {
+  id         Int      @id @default(autoincrement())
+  action     String
+  targetName String
+  type       String
+  userId     Int      @map("user_id")
+  user       User     @relation(fields: [userId], references: [id])
+  createdAt  DateTime @default(now()) @map("create_at")
+
+  @@map("activity_log")
 }

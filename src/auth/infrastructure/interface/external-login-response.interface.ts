@@ -10,6 +10,7 @@ export interface ExternalLoginResponse {
             last_name: string;
             email: string;
             empimg: string;
+            status: string;
             department?: {
                 id: number;
                 department_name: string;
@@ -18,6 +19,10 @@ export interface ExternalLoginResponse {
                 id: number;
                 division_name: string;
             };
+            unit?: {
+                id: number;
+                unit_name: string;
+            }
         };
     };
     token: string;
