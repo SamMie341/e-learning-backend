@@ -1,9 +1,9 @@
 import { ForbiddenException, Injectable, NotFoundException } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
-import { Role } from 'src/common/enums/role.enum';
+import { PrismaService } from '../../prisma/prisma.service';
+import { Role } from '../../common/enums/role.enum';
 import { CreateLessonDto } from './dtos/create-lessons.dto';
 import { UpdateLessonsDto } from './dtos/update-lesson.dto';
-import { EnrollmentsService } from 'src/enrollments/application/enrollments.service';
+import { EnrollmentsService } from '../../enrollments/application/enrollments.service';
 import { Response } from 'express';
 import { join } from 'path';
 import { createReadStream, existsSync, statSync } from 'fs';

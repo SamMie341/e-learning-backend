@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from 'src/auth/auth.module';
-import { CategoriesService } from 'src/categories/application/categories.sevice';
-import { CategoriesController } from 'src/categories/presentation/categories.controller';
+import { AuthModule } from '../auth/auth.module';
+import { CategoriesService } from '../categories/application/categories.sevice';
+import { CategoriesController } from '../categories/presentation/categories.controller';
 
 @Module({
     imports: [AuthModule],

@@ -1,9 +1,9 @@
 import { Module } from '@nestjs/common';
-import { AuthModule } from 'src/auth/auth.module';
+import { AuthModule } from '../auth/auth.module';
 import { LessonsController } from './presentation/lessons.controller';
 import { LessonsService } from './application/lessons.service';
-import { EnrollmentsModule } from 'src/enrollments/enrollments.module';
-import { PrismaModule } from 'src/prisma/prisma.module';
+import { EnrollmentsModule } from '../enrollments/enrollments.module';
+import { PrismaModule } from '../prisma/prisma.module';
 import { MulterModule } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';

@@ -1,7 +1,6 @@
 import { Controller, Get, Param, ParseIntPipe, Post, Request, UseGuards } from '@nestjs/common';
-import { AuthGuard } from '@nestjs/passport';
 import { EnrollmentsService } from '../application/enrollments.service';
-import { JwtAuthGuard } from 'src/auth/presentation/guards/jwt-auth.guard';
+import { JwtAuthGuard } from '../../auth/presentation/guards/jwt-auth.guard';
 
 @Controller('enrollments')
 @UseGuards(JwtAuthGuard)

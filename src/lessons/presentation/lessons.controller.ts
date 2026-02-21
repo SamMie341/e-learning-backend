@@ -1,13 +1,13 @@
 import { Body, Controller, Delete, Get, Headers, Param, ParseIntPipe, Post, Put, Request, Res, UploadedFile, UseGuards, UseInterceptors } from '@nestjs/common';
 import { LessonsService } from '../application/lessons.service';
 import { AuthGuard } from '@nestjs/passport';
-import { RoleGuard } from 'src/common/guards/roles.guard';
-import { Roles } from 'src/common/decorators/roles.decorator';
-import { Role } from 'src/common/enums/role.enum';
+import { RoleGuard } from '../../common/guards/roles.guard';
+import { Roles } from '../../common/decorators/roles.decorator';
+import { Role } from '../../common/enums/role.enum';
 import { CreateLessonDto } from '../application/dtos/create-lessons.dto';
 import { UpdateLessonsDto } from '../application/dtos/update-lesson.dto';
-import { JwtAuthGuard } from 'src/auth/presentation/guards/jwt-auth.guard';
-import { EnrollmentsService } from 'src/enrollments/application/enrollments.service';
+import { JwtAuthGuard } from '../../auth/presentation/guards/jwt-auth.guard';
+import { EnrollmentsService } from '../../enrollments/application/enrollments.service';
 import { ApiBody, ApiConsumes } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
 import type { Response } from 'express';
