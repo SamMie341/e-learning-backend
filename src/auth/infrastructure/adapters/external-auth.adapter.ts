@@ -1,7 +1,7 @@
 import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
 import { IAuthProvider } from "src/auth/domain/ports/auth-provider.port";
 import { HttpService } from "@nestjs/axios";
-import { AuthUser } from "src/auth/domain/entities/auth-user.entity";
+import { AuthUser } from "../../domain/entities/auth-user.entity";
 import { firstValueFrom } from "rxjs";
 import { ConfigService } from "@nestjs/config";
 import { ExternalLoginResponse } from "../interface/external-login-response.interface";
