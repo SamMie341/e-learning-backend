@@ -1,8 +1,8 @@
 import { Controller, Get, Request, UseGuards } from "@nestjs/common";
 import { AuthGuard } from "@nestjs/passport";
-import { Roles } from "src/common/decorators/roles.decorator";
-import { Role } from "src/common/enums/role.enum";
-import { RoleGuard } from "src/common/guards/roles.guard";
+import { Roles } from "../../common/decorators/roles.decorator";
+import { Role } from "../../common/enums/role.enum";
+import { RoleGuard } from "../../common/guards/roles.guard";
 
 @Controller('student')
 @UseGuards(AuthGuard('jwt'), RoleGuard)

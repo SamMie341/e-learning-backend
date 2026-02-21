@@ -1,7 +1,7 @@
 import { Body, Controller, Get, Param, ParseIntPipe, Put, Query, UseGuards } from "@nestjs/common";
-import { Roles } from "src/common/decorators/roles.decorator";
-import { Role } from "src/common/enums/role.enum";
-import { RoleGuard } from "src/common/guards/roles.guard";
+import {Roles} from "../../common/decorators/roles.decorator";
+import { Role } from "../../common/enums/role.enum";
+import { RoleGuard } from "../../common/guards/roles.guard";
 import { AuthGuard } from "@nestjs/passport";
 import { ManageUsersUseCase } from "../application/use-cases/manage-users.use-case";
 

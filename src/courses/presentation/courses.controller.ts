@@ -1,9 +1,9 @@
 import { BadRequestException, Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, Query, Request, UploadedFile, UseGuards, UseInterceptors } from "@nestjs/common";
 import { CoursesService } from "../application/courses.service";
 import { AuthGuard } from "@nestjs/passport";
-import { RoleGuard } from "src/common/guards/roles.guard";
-import { Roles } from "src/common/decorators/roles.decorator";
-import { Role } from "src/common/enums/role.enum";
+import { RoleGuard } from "../../common/guards/roles.guard";
+import { Roles } from "../../common/decorators/roles.decorator";
+import { Role } from "../../common/enums/role.enum";
 import { CreateCourseDto } from "../application/dtos/create-course.dto";
 import { FileInterceptor } from "@nestjs/platform-express";
 import { UpdateCourseDto } from "../application/dtos/update-course.dto";

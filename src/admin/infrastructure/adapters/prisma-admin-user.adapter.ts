@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { User } from "@prisma/client";
-import { FindUserOptions, IAdminUserRepository } from "src/admin/domain/ports/admin-user.repository";
-import { PrismaService } from "src/prisma/prisma.service";
+import { FindUserOptions, IAdminUserRepository } from "../../../admin/domain/ports/admin-user.repository";
+import { PrismaService } from "../../../prisma/prisma.service";
 
 @Injectable()
 export class PrismaAdminUserAdapter implements IAdminUserRepository {

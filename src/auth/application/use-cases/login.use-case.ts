@@ -1,9 +1,9 @@
 import { Injectable, UnauthorizedException } from "@nestjs/common";
-import { IAuthProvider } from "src/auth/domain/ports/auth-provider.port";
+import { IAuthProvider } from "../../../auth/domain/ports/auth-provider.port";
 import {JwtService} from "@nestjs/jwt";
 import { LoginRequestDto } from "../dto/login-request.dto";
-import { ILoginLogger } from "src/auth/domain/ports/login-logger.port";
-import { IUserRepository } from "src/auth/domain/ports/user-repository.port";
+import { ILoginLogger } from "../../../auth/domain/ports/login-logger.port";
+import { IUserRepository } from "../../../auth/domain/ports/user-repository.port";
 
 @Injectable()
 export class LoginUseCase {

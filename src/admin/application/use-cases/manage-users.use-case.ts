@@ -1,6 +1,6 @@
 import { Injectable, NotFoundException } from "@nestjs/common";
-import { IAdminUserRepository } from "src/admin/domain/ports/admin-user.repository";
-import { PrismaService } from "src/prisma/prisma.service";
+import { IAdminUserRepository } from "../../../admin/domain/ports/admin-user.repository";
+import { PrismaService } from "../../../prisma/prisma.service";
 
 @Injectable()
 export class ManageUsersUseCase {

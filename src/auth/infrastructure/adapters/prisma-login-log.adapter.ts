@@ -1,6 +1,6 @@
 import { Injectable } from "@nestjs/common";
-import { ILoginLogger } from "src/auth/domain/ports/login-logger.port";
-import { PrismaService } from "src/prisma/prisma.service";
+import { ILoginLogger } from "../../../auth/domain/ports/login-logger.port";
+import { PrismaService } from "../../../prisma/prisma.service";
 
 @Injectable()
 export class PrismaLoginLogAdapter implements ILoginLogger {

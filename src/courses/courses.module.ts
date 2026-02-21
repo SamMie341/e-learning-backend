@@ -1,5 +1,5 @@
 import { Module } from "@nestjs/common";
-import { AuthModule } from "src/auth/auth.module";
+import { AuthModule } from "../auth/auth.module";
 import { CoursesController } from "./presentation/courses.controller";
 import { CoursesService } from "./application/courses.service";
 import { MulterModule } from "@nestjs/platform-express";

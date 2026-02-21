@@ -1,8 +1,8 @@
 import { ForbiddenException, Injectable, NotFoundException } from "@nestjs/common";
-import { PrismaService } from "src/prisma/prisma.service";
+import { PrismaService } from "../../prisma/prisma.service";
 import { CreateCourseDto } from "./dtos/create-course.dto";
 import { UpdateCourseDto } from "./dtos/update-course.dto";
-import { Role } from "src/common/enums/role.enum";
+import { Role } from "../../common/enums/role.enum";
 import { GetCoursesFilterDto } from "./dtos/get-courses-filter.dto";
 
 @Injectable()

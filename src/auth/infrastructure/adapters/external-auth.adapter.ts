@@ -1,5 +1,5 @@
 import { Injectable, Logger, UnauthorizedException } from "@nestjs/common";
-import { IAuthProvider } from "src/auth/domain/ports/auth-provider.port";
+import { IAuthProvider } from "../../../auth/domain/ports/auth-provider.port";
 import { HttpService } from "@nestjs/axios";
 import { AuthUser } from "../../domain/entities/auth-user.entity";
 import { firstValueFrom } from "rxjs";

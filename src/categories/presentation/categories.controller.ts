@@ -1,10 +1,10 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Post, Put, UseGuards } from "@nestjs/common";
 import { CategoriesService } from "../application/categories.sevice";
 import { AuthGuard } from "@nestjs/passport";
-import { RoleGuard } from "src/common/guards/roles.guard";
+import { RoleGuard } from "../../common/guards/roles.guard";
 import { CreateCategoryDto } from "../application/dtos/create-category.dto";
-import { Roles } from "src/common/decorators/roles.decorator";
-import { Role } from "src/common/enums/role.enum";
+import { Roles } from "../../common/decorators/roles.decorator";
+import { Role } from "../../common/enums/role.enum";
 import { UpdateCategoryDto } from "../application/dtos/update-category.dto";
 
 @Controller('categories')
