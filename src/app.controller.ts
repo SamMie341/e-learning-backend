@@ -1,12 +1,18 @@
 import { Controller, Get } from '@nestjs/common';
-import { AppService } from './app.service';
+import { ApiOperation, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Root') // จัดหมวดหมู่ในหน้า Swagger
 @Controller()
 export class AppController {
-  constructor(private readonly appService: AppService) {}
-
+  
+  // สร้าง Endpoint เริ่มต้นสำหรับตรวจสอบสถานะ API (Health Check)
   @Get()
-  health() {
-    return {status: 'ok'};
+  @ApiOperation({ summary: 'API Health Check' })
+  getHello() {
+    return {
+      status: 'OK',
+      message: 'E-Learning API is running successfully! 🚀',
+      timestamp: new Date().toISOString(),
+    };
   }
 }
