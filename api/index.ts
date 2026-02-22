@@ -5,12 +5,20 @@ import express from 'express';
 
 const server = express();
 
-export default async (req: any, res: any) => {
-  const app = await NestFactory.create(
-    AppModule,
-    new ExpressAdapter(server)
-  );
+// สร้างฟังก์ชันสำหรับบูตแอป
+async function createServer() {
+  const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
   app.enableCors();
   await app.init();
-  server(req, res);
+}
+
+// ตัวแปรเก็บสถานะว่าแอปตื่นหรือยัง
+let cachedServer = false;
+
+export default async (req: any, res: any) => {
+  if (!cachedServer) {
+    await createServer();
+    cachedServer = true;
+  }
+  return server(req, res);
 };
