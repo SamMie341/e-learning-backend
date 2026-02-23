@@ -8,6 +8,7 @@ let cachedServer = false;
 
 async function createServer() {
   const app = await NestFactory.create(AppModule, new ExpressAdapter(server));
+  app.setGlobalPrefix('api');
   app.enableCors();
   await app.init();
 }
