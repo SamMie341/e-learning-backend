@@ -9,10 +9,15 @@ import { FileInterceptor } from "@nestjs/platform-express";
 import { UpdateCourseDto } from "../application/dtos/update-course.dto";
 import { GetCoursesFilterDto } from "../application/dtos/get-courses-filter.dto";
 import { ApiBearerAuth, ApiConsumes, ApiOperation } from "@nestjs/swagger";
+import { StorageService } from "src/upload/storage.service";
+import * as multer from "multer";
 
 @Controller('courses')
 export class CoursesController {
-    constructor(private readonly coursesService: CoursesService) { }
+    constructor(
+        private readonly coursesService: CoursesService,
+        private readonly storageService: StorageService,
+    ) { }
 
     @Get()
     getAll(@Query() filter: GetCoursesFilterDto) {
@@ -25,10 +30,15 @@ export class CoursesController {
     @ApiConsumes('multipart/form-data')
     @UseGuards(AuthGuard('jwt'), RoleGuard)
     @Roles(Role.ADMIN)
-    @UseInterceptors(FileInterceptor('thumbnail'))
-    create(@Body() body: any,
+    @UseInterceptors(FileInterceptor('thumbnail',{
+        storage: multer.memoryStorage(),
+        limits: { fileSize: 4 * 1024 *1024 }
+    }))
+    async create(
+        @Body() body: any,
         @UploadedFile() file: Express.Multer.File,
         @Request() req,) {
+
         const dto = new CreateCourseDto();
         dto.title = body.title;
         dto.description = body.description;
@@ -41,7 +51,8 @@ export class CoursesController {
         let thumbnailUrl: string | null = null;
 
         if (file) {
-            thumbnailUrl = `/uploads/courses/${file.filename}`;
+            const uploadResult = await this.storageService.uploadFile(file, 'courses');
+            thumbnailUrl = uploadResult.url;
         }
 
         const userId = req.user.id;
@@ -51,7 +62,10 @@ export class CoursesController {
     @Post(':id/thumbnail')
     @UseGuards(AuthGuard('jwt'), RoleGuard)
     @Roles(Role.ADMIN, Role.INSTRUCTOR)
-    @UseInterceptors(FileInterceptor('thumbnail'))
+    @UseInterceptors(FileInterceptor('thumbnail',{
+        storage: multer.memoryStorage(),
+        limits: {fileSize: 4 * 1024 * 1024 }
+    }))
     async uploadThumbnail(
         @Param('id', ParseIntPipe) id: number,
         @UploadedFile() file: Express.Multer.File
@@ -59,8 +73,8 @@ export class CoursesController {
         if (!file) {
             throw new BadRequestException('File is required');
         }
-        const imageUrl = `/uploads/courses/${file.filename}`;
-        return this.coursesService.updateThumbnail(id, imageUrl);
+        const uploadResult = await this.storageService.uploadFile(file, 'courses');
+        return this.coursesService.updateThumbnail(id, uploadResult.url);
     }
 
     @Put(':id')
