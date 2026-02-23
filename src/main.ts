@@ -6,6 +6,8 @@ import { DocumentBuilder, SwaggerModule } from '@nestjs/swagger';
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
 
+  app.setGlobalPrefix('api');
+
   // 1. 🌐 ເປີດໃຊ້ງານ CORS (ສຳຄັນຫຼາຍສຳລັບ Next.js ທີ່ຢູ່ຄົນລະ Domain)
   app.enableCors({
     origin: '*', // ໃນ Production ຄວນປ່ຽນເປັນ URL ຂອງ Next.js ເຊັ່ນ 'https://my-frontend.vercel.app'
