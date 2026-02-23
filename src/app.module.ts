@@ -15,6 +15,7 @@ import { DashboardModule } from './dashboard/dashboard.module';
 import { APP_INTERCEPTOR } from '@nestjs/core';
 import { UserActivityInterceptor } from './common/interceptors/user-activity.interceptors';
 import { UsersModule } from './users/users.module';
+import { UploadModule } from './upload/upload.module';
 
 @Module({
   imports: [
@@ -35,6 +36,7 @@ import { UsersModule } from './users/users.module';
     EnrollmentsModule,
     DashboardModule,
     UsersModule,
+    UploadModule,
   ],
   controllers: [AppController],
   providers: [
